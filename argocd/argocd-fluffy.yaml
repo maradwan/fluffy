@@ -1,0 +1,283 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  creationTimestamp: "2020-12-25T02:35:02Z"
+  generation: 20
+  managedFields:
+  - apiVersion: argoproj.io/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        .: {}
+        f:destination:
+          .: {}
+          f:namespace: {}
+          f:server: {}
+        f:project: {}
+        f:source:
+          .: {}
+          f:path: {}
+          f:repoURL: {}
+          f:targetRevision: {}
+        f:syncPolicy:
+          .: {}
+          f:automated: {}
+      f:status:
+        .: {}
+        f:health: {}
+        f:summary: {}
+        f:sync:
+          .: {}
+          f:comparedTo:
+            .: {}
+            f:destination: {}
+            f:source: {}
+    manager: argocd-server
+    operation: Update
+    time: "2020-12-25T02:35:02Z"
+  - apiVersion: argoproj.io/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:health:
+          f:status: {}
+        f:history: {}
+        f:operationState:
+          .: {}
+          f:finishedAt: {}
+          f:message: {}
+          f:operation:
+            .: {}
+            f:initiatedBy:
+              .: {}
+              f:automated: {}
+            f:retry:
+              .: {}
+              f:limit: {}
+            f:sync:
+              .: {}
+              f:revision: {}
+          f:phase: {}
+          f:startedAt: {}
+          f:syncResult:
+            .: {}
+            f:resources: {}
+            f:revision: {}
+            f:source:
+              .: {}
+              f:path: {}
+              f:repoURL: {}
+              f:targetRevision: {}
+        f:reconciledAt: {}
+        f:resources: {}
+        f:sourceType: {}
+        f:summary:
+          f:images: {}
+        f:sync:
+          f:comparedTo:
+            f:destination:
+              f:namespace: {}
+              f:server: {}
+            f:source:
+              f:path: {}
+              f:repoURL: {}
+              f:targetRevision: {}
+          f:revision: {}
+          f:status: {}
+    manager: argocd-application-controller
+    operation: Update
+    time: "2020-12-25T02:35:31Z"
+  name: fluffy
+  namespace: argocd
+  resourceVersion: "3275905"
+  selfLink: /apis/argoproj.io/v1alpha1/namespaces/argocd/applications/fluffy
+  uid: c49c20ea-64f8-4576-8cc0-a26ca92c1ae2
+spec:
+  destination:
+    namespace: fluffy
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: k8
+    repoURL: https://github.com/maradwan/fluffy
+    targetRevision: HEAD
+  syncPolicy:
+    automated: {}
+status:
+  health:
+    status: Healthy
+  history:
+  - deployStartedAt: "2020-12-25T02:35:03Z"
+    deployedAt: "2020-12-25T02:35:06Z"
+    id: 0
+    revision: d3c1440e15c4bded388a6ce81e5e8af1a6d69f3b
+    source:
+      path: k8
+      repoURL: https://github.com/maradwan/fluffy
+      targetRevision: HEAD
+  operationState:
+    finishedAt: "2020-12-25T02:35:06Z"
+    message: successfully synced (all tasks run)
+    operation:
+      initiatedBy:
+        automated: true
+      retry:
+        limit: 5
+      sync:
+        revision: d3c1440e15c4bded388a6ce81e5e8af1a6d69f3b
+    phase: Succeeded
+    startedAt: "2020-12-25T02:35:03Z"
+    syncResult:
+      resources:
+      - group: ""
+        hookPhase: Running
+        kind: PersistentVolume
+        message: persistentvolume/pv-volume created
+        name: pv-volume
+        namespace: fluffy
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: PersistentVolumeClaim
+        message: persistentvolumeclaim/pv-claim created
+        name: pv-claim
+        namespace: fluffy
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: Service
+        message: service/db created
+        name: db
+        namespace: fluffy
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: Service
+        message: service/app created
+        name: app
+        namespace: fluffy
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: Service
+        message: service/www created
+        name: www
+        namespace: fluffy
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: apps
+        hookPhase: Running
+        kind: Deployment
+        message: deployment.apps/www created
+        name: www
+        namespace: fluffy
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: apps
+        hookPhase: Running
+        kind: Deployment
+        message: deployment.apps/mysql created
+        name: mysql
+        namespace: fluffy
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: apps
+        hookPhase: Running
+        kind: Deployment
+        message: deployment.apps/fluffy-deployment created
+        name: fluffy-deployment
+        namespace: fluffy
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      revision: d3c1440e15c4bded388a6ce81e5e8af1a6d69f3b
+      source:
+        path: k8
+        repoURL: https://github.com/maradwan/fluffy
+        targetRevision: HEAD
+  reconciledAt: "2020-12-25T02:35:07Z"
+  resources:
+  - kind: PersistentVolume
+    name: pv-volume
+    status: Synced
+    version: v1
+  - health:
+      status: Healthy
+    kind: PersistentVolumeClaim
+    name: pv-claim
+    namespace: fluffy
+    status: Synced
+    version: v1
+  - health:
+      status: Healthy
+    kind: Service
+    name: app
+    namespace: fluffy
+    status: Synced
+    version: v1
+  - health:
+      status: Healthy
+    kind: Service
+    name: db
+    namespace: fluffy
+    status: Synced
+    version: v1
+  - health:
+      status: Healthy
+    kind: Service
+    name: www
+    namespace: fluffy
+    status: Synced
+    version: v1
+  - group: apps
+    health:
+      status: Healthy
+    kind: Deployment
+    name: fluffy-deployment
+    namespace: fluffy
+    status: Synced
+    version: v1
+  - group: apps
+    health:
+      status: Healthy
+    kind: Deployment
+    name: mysql
+    namespace: fluffy
+    status: Synced
+    version: v1
+  - group: apps
+    health:
+      status: Healthy
+    kind: Deployment
+    name: www
+    namespace: fluffy
+    status: Synced
+    version: v1
+  sourceType: Directory
+  summary:
+    images:
+    - maradwan/fluffy:v3
+    - maradwan/nginxgunicorn:v1
+    - mysql:5.7
+  sync:
+    comparedTo:
+      destination:
+        namespace: fluffy
+        server: https://kubernetes.default.svc
+      source:
+        path: k8
+        repoURL: https://github.com/maradwan/fluffy
+        targetRevision: HEAD
+    revision: d3c1440e15c4bded388a6ce81e5e8af1a6d69f3b
+    status: Synced
