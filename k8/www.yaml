@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: www
+  labels:
+    name: www
+spec:
+  selector:
+    matchLabels:
+      app: www
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: www
+    spec:
+      containers:
+      - name: www
+        image: maradwan/nginxgunicorn:v1
+        ports:
+        - containerPort: 80

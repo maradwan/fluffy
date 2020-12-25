@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fluffy-deployment
+spec:
+  selector:
+    matchLabels:
+      app: fluffy
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: fluffy
+    spec:
+      containers:
+       - name: fluffy
+         image: maradwan/fluffy:v3
+         env:
+         - name: "SQLALCHEMY_DATABASE_URI"
+           value: "mysql://root:password@db/fluffy?charset=utf8"
+         - name: "APP_SECRET_KEY"
+           value: "xi3aiGiewip1ze7MFei9haotvoo9Wo4k"
+         - name: "SQLALCHEMY_TRACK_MODIFICATIONS"
+           value: "False"
+         - name: "ADMIN_USER"
+           value: "admin"
+         - name: "DEMO_USER"
+           value: "demo"
+         - name: "DEMO_PASSWORD"
+           value: "Demo1234"
+         - name: "ADMIN_PASSWORD"
+           value: "Oothai1y@Z3e5fzGa@2hV1aes"
+         - name: "RECAPTCHA_PUBLIC_KEY"
+           value: "6Ldqcf4UAAAAAEmu7JKm4ILrsrkFTDWll03NsZ3U"
+         - name: "RECAPTCHA_PRIVATE_KEY"
+           value: "6Ldqcf4UAAAAAPx_ypVSEyxnLMzVEJxX9C2Jau1u"
+         - name: "DEBUG_METRICS"
+           value: "false"
+         ports:
+         - containerPort: 5000
+         livenessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 20
+          timeoutSeconds: 5
+          periodSeconds: 10

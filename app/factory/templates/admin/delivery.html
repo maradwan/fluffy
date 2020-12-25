@@ -1,0 +1,44 @@
+
+{% extends 'admin/master.html' %}
+{% block head_css %}
+{{ super() }}
+ {% endblock head_css %}
+
+{% block body %}
+{{ super() }}
+
+
+<form action="{{ url_for('deliveryview.delivery') }}" method="POST">
+
+                                <h1>Delivery</h1>
+
+
+    {{ form.hidden_tag() }}
+
+    <div class="container">
+
+    {{ form.get_date.label }}
+   <div class="form-group"><label class="control-label required"></label><input name="get_date" required="required" type="date" maxlength="100"  /></div>
+
+   {{ form.day.label }}
+   <select name="day">
+
+         <option value="sat">Saturday</option>
+         <option value="sun">Sunday</option>
+         <option value="mon">Monday</option>
+         <option value="tue">Tuesday</option>
+         <option value="wen">Wednesday</option>
+         <option value="thr">Thursday</option>
+         <option value="fri">Friday</option>
+        </select>
+
+
+<div>
+    <input type="submit" value="Submit" class="btn btn-primary">
+                        </div>
+                </div>
+        </div>
+  </form>
+
+
+{% endblock body %}

@@ -1,0 +1,79 @@
+{% extends 'admin/master.html' %}
+{% block head_css %}
+{{ super() }}
+
+ {% endblock head_css %}
+
+{% block body %}
+{{ super() }}
+<title>Delivery</title>
+<p>Search Results </p>
+<p> {{ form.get_date.label }}: {{ form.get_date.data }} </p>
+
+<p>{{ form.day.label }}: {{ form.day.data|title }} </p>
+
+<div class="container">
+      <table class="table table-striped">
+            <thead>
+              <tr>
+                  <th scope="col">Client ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Mobile</th>
+                  <th scope="col">City</th>
+                  <th scope="col">Street</th>
+                  <th scope="col">Floor</th>
+                  <th scope="col">Building</th>
+                  <th scope="col">Apartment</th>
+                  <th scope="col">Address Directions</th>
+                  <th scope="col">Client Comments</th>
+                  <th scope="col">Item</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Start Contract</th>
+                  <th scope="col">End Contract</th>
+                  <th scope="col">Order Comments</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                  {% for i in data %}
+                  <td scope="row">{{ i.client.client_id }}</td>
+                  <td scope="row">{{ i.client.name }}</td>
+                  {% if i.client.phone2 == None %}
+                  <td scope="row">{{ i.client.phone1 }}</td>
+                  {% else %}
+                  <td scope="row">{{ i.client.phone1 }} - {{ i.client.phone2 }}</td>
+                  {% endif %}
+
+                  <td scope="row">{{ i.client.city }}</td>
+                  <td scope="row">{{ i.client.street }}</td>
+                  <td scope="row">{{ i.client.floor }}</td>
+                  <td scope="row">{{ i.client.building }}</td>
+                  <td scope="row">{{ i.client.apartment }}</td>
+                  {% if i.client.address_directions == None %}
+                  <td></td>
+                  {% else %}
+                  <td>{{ i.client.address_directions }}</td>
+                  {% endif %}
+
+                  {% if i.client.comments == None %}
+                  <td></td>
+                  {% else %}
+                  <td>{{ i.client.comments }}</td>
+                  {% endif %}
+                  <td scope="row">{{ i.item.items }}</td>
+                  <td scope="row">{{ i.item.price }}</td>
+                  <td scope="row">{{ i.quantity_per_day }}</td>
+                  <td scope="row">{{ i.start_contract }}</td>
+                  <td scope="row">{{ i.end_contract }}</td>
+                  {% if i.comments == None %}
+                  <td></td>
+                  {% else %}
+                  <td>{{ i.comments }}</td>
+                  {% endif %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+      {% endblock body %}

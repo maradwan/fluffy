@@ -1,0 +1,45 @@
+version: '2.1'
+services:
+
+  app:
+    restart: always
+    build: app/.
+    links:
+      - db
+    depends_on:
+      - db
+    environment:
+     - SQLALCHEMY_DATABASE_URI=mysql://root:password@db/fluffy?charset=utf8
+     - APP_SECRET_KEY=xi3aiGiewip1ze7MFei9haotvoo9Wo4k
+     - SQLALCHEMY_TRACK_MODIFICATIONS=False
+     - ADMIN_USER=admin
+     - DEMO_USER=demo
+     - DEMO_PASSWORD=Demo1234
+     - ADMIN_PASSWORD=Oothai1y@Z3e5fzGa@2hV1aes
+     - RECAPTCHA_PUBLIC_KEY=
+     - RECAPTCHA_PRIVATE_KEY=
+
+  db:
+    restart: always
+    build: db/.
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+    environment:
+       MYSQL_DATABASE: "fluffy"
+       MYSQL_ROOT_PASSWORD: password
+    healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-p", "password"]
+            timeout: 20s
+            retries: 10
+    ports:
+       - "3306:3306"
+
+  www:
+    restart: always
+    build: nginx/.
+    links:
+      - app
+    depends_on:
+      - app
+    ports:
+      - "80:80"

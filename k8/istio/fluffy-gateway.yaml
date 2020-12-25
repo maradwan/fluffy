@@ -1,0 +1,51 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: fluffy-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: fluffy
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - fluffy-gateway
+  http:
+  - match:
+    - uri:
+        exact: /signin
+    - uri:
+        prefix: /signin
+    - uri:
+        exact: /profile
+    - uri:
+        prefix: /profile
+    - uri:
+        exact: /signout
+    - uri:
+        prefix: /signout
+    - uri:
+        exact: /admin
+    - uri:
+        prefix: /admin
+    - uri:
+        exact: /testdb
+    - uri:
+        prefix: /testdb
+    route:
+    - destination:
+        host: app
+        port:
+          number: 5000

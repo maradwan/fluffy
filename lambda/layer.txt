@@ -1,0 +1,10 @@
+############
+mkdir layer
+cd layer
+mkdir python
+cd python
+pip install kubernetes -t .
+cd ..
+zip -r kubernetes_layer.zip .
+############
+Upload kubernetes_layer.zip to Lambda Layers.
