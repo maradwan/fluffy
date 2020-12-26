@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
        - name: fluffy
-         image: maradwan/fluffy:v3
+         image: maradwan/fluffy:v4
          env:
          - name: "SQLALCHEMY_DATABASE_URI"
            value: "mysql://root:password@db/fluffy?charset=utf8"
